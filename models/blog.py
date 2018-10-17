@@ -12,7 +12,7 @@ class Blog(object):
         self.author = author
         self.title = title
         self.description = description
-        self.id = uuid.uuid4.hex if id is None else id
+        self.id = uuid.uuid4().hex if id is None else id
 
     def new_post(self):
         title = input("Enter title of post: ")
@@ -42,9 +42,9 @@ class Blog(object):
         }
 
     @classmethod
-    def get_from_mongo(cls, self):
+    def get_from_mongo(cls, id):
         blog_data = Database.find_one(collection='blogs',
-                                      data=self.id)
+                                      query={'id': id})
         return cls(author=blog_data['author'],
                    title=blog_data['title'],
                    description=blog_data['description'],

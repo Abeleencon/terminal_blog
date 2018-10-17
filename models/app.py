@@ -1,14 +1,20 @@
 from database import Database
+from models.blog import Blog
 from models.post import Post
 
 __author__ = 'Abiodun'
 
 Database.initialize()
 
-post1 = Post(blog_id="1233",
-             title="The Act",
-             author="Johnny Bravo",
-             content="The Act of doing right")
+blog = Blog(title="The Act",
+            author="Johnny Bravo",
+            description="The Act of doing right")
+
+blog.new_post()
+
+blog.save_to_mongo()
+
+from_database = Blog.get_from_mongo(id)
 
 '''post2 = Post(blog_id="1234",
              title="Things Fall Apart",
@@ -16,8 +22,8 @@ post1 = Post(blog_id="1233",
              content="Nobel prize book")
 '''
 
-print(post1.content)
+print(blog.get_post())
 
-post1.save_to_mongo()
+#blog.save_to_mongo()
 
 
